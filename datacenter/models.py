@@ -21,20 +21,38 @@ class Visit(models.Model):
     entered_at = models.DateTimeField()
     leaved_at = models.DateTimeField(null=True)
 
+
+
     def duration(self):
         time_leaved = self.leaved_at
         time_entered = self.entered_at
-        duration = time_leaved - time_entered
-        duration_hours = duration.seconds // 60 // 60
-        duration_minutes = duration.seconds // 60 % 60
-        return f'{duration_hours} ч.{duration_minutes} мин.'
+        if time_leaved:
+            duration = time_leaved - time_entered
+            duration_hours = duration.seconds // 60 // 60
+            duration_minutes = duration.seconds // 60 % 60
+            return f'{duration_hours} ч.{duration_minutes} мин.'
+        else:
+            time_now = django.utils.timezone.localtime()
+            duration = time_now - time_entered
+            duration_hours = duration.seconds // 60 // 60
+            duration_minutes = duration.seconds // 60 % 60
+            return f'{duration_hours} ч.{duration_minutes} мин.'
+
 
     def long_visit(self):
-        p = self.leaved_at - self.entered_at
-        p_h = p.seconds // 60
-        if p_h > 60:
-            return True
-        return False
+        time_now = django.utils.timezone.localtime()
+        if self.leaved_at:
+            p = self.leaved_at - self.entered_at
+            p_h = p.seconds // 60
+            if p_h > 60:
+                return True
+            return False
+        else:
+            p = time_now - self.entered_at
+            p_h = p.seconds // 60
+            if p_h > 60:
+                return True
+            return False
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
