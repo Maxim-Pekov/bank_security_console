@@ -27,7 +27,7 @@ class Visit(models.Model):
         duration = time_now - time_entered
         duration_hours = duration.seconds // 60 // 60
         duration_minutes = duration.seconds // 60 % 60
-        return f'{duration_hours}:{duration_minutes}'
+        return f'{duration_hours}:{duration_minutes}:{duration.seconds % 60}'
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
