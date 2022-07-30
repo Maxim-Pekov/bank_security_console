@@ -1,2 +1,9 @@
-venv
+env/
+.venv
+/venv/**
+.vscode/
 .idea
+.replit
+/**/__pycache__
+/**/Thumbs.db
+/**/.DS_Store

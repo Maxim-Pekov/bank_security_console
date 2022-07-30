@@ -43,23 +43,20 @@
                 </thead>
                 <tbody>
                     {% for visit in this_passcard_visits %}
-                    {% if visit.is_strange %}
-                    <tr style="border: 2px double red">
-                    {% else %}
-                    <tr>
-                    {% endif %}
-
-                        <td class="table-element">{{ forloop.counter }}</td>
-
-                        <td class="table-element"><strong>{{ visit.entered_at }}</strong></td>
-
-                        <td class="table-element">{{ visit.duration }}</td>
                         {% if visit.is_strange %}
-                            <td class="table-element" style="color:red">{{ visit.is_strange }}</td>
+                        <tr style="border: 2px double red">
                         {% else %}
-                            <td class="table-element">{{ visit.is_strange }}</td>
+                        <tr>
                         {% endif %}
-                    </tr>
+                            <td class="table-element">{{ forloop.counter }}</td>
+                            <td class="table-element"><strong>{{ visit.entered_at }}</strong></td>
+                            <td class="table-element">{{ visit.duration }}</td>
+                            {% if visit.is_strange %}
+                                <td class="table-element" style="color:red">{{ visit.is_strange }}</td>
+                            {% else %}
+                                <td class="table-element">{{ visit.is_strange }}</td>
+                            {% endif %}
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>

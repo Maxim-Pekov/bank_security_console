@@ -42,12 +42,16 @@
                 </thead>
                 <tbody>
                     {% for passcard in active_passcards %}
-                    <tr>
-                        <td class="table-element">{{ forloop.counter }}</td>
-                            <td class="table-element"><a href="{% url 'passcard_info' passcode=passcard.passcode %}"><strong>{{ passcard.owner_name }}</strong></a></td>
-                        <td class="table-element">{{ passcard.passcode }}</td>
-                        <td class="table-element">{{ passcard.created_at }}</td>
-                    </tr>
+                        <tr>
+                            <td class="table-element">{{ forloop.counter }}</td>
+                            <td class="table-element">
+                                <a href="{% url 'passcard_info' passcode=passcard.passcode %}">
+                                    <strong>{{ passcard.owner_name }}</strong>
+                                </a>
+                            </td>
+                            <td class="table-element">{{ passcard.passcode }}</td>
+                            <td class="table-element">{{ passcard.created_at }}</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>

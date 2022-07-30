@@ -1,5 +1,4 @@
 from django.db import models
-import datetime
 import django
 
 
@@ -21,9 +20,9 @@ class Visit(models.Model):
     entered_at = models.DateTimeField()
     leaved_at = models.DateTimeField(null=True)
 
+    def get_duration(self):
+        '''Возвращает время пребывания в хранилище'''
 
-
-    def duration(self):
         time_leaved = self.leaved_at
         time_entered = self.entered_at
         if time_leaved:
@@ -38,19 +37,21 @@ class Visit(models.Model):
             duration_minutes = duration.seconds // 60 % 60
             return f'{duration_hours} ч.{duration_minutes} мин.'
 
+    def find_long_visit(self):
+        '''Возвращает True, если время нахождения в хранилище более strange_time'''
 
-    def long_visit(self):
         time_now = django.utils.timezone.localtime()
+        strange_time = 60   # 60 minutes
         if self.leaved_at:
-            p = self.leaved_at - self.entered_at
-            p_h = p.seconds // 60
-            if p_h > 60:
+            duration = self.leaved_at - self.entered_at
+            duration_by_minutes = duration.seconds // 60
+            if duration_by_minutes > strange_time:
                 return True
             return False
         else:
-            p = time_now - self.entered_at
-            p_h = p.seconds // 60
-            if p_h > 60:
+            duration = time_now - self.entered_at
+            duration_by_minutes = duration.seconds // strange_time
+            if duration_by_minutes > strange_time:
                 return True
             return False
 

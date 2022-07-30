@@ -42,18 +42,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for visit in non_closed_visits %}
-                    <tr>
-                        <td class="table-element">{{ forloop.counter }}</td>
-                        <td class="table-element">{{ visit.passcard.owner_name }}</td>
-                            <td class="table-element"><strong>{{ visit.entered_at }}</strong></td>
-                        <td class="table-element">{{ visit.duration }}</td>
-                        {% if visit.long_visit %}
-                            <td class="table-element" style="color:red">{{ visit.long_visit }}</td>
-                        {% else %}
-                            <td class="table-element">{{ visit.long_visit }}</td>
-                        {% endif %}
-                    </tr>
+                    {% for non_closed_visit in non_closed_visits %}
+                        <tr>
+                            <td class="table-element">{{ forloop.counter }}</td>
+                            <td class="table-element">{{ non_closed_visit.passcard.owner_name }}</td>
+                            <td class="table-element"><strong>{{ non_closed_visit.entered_at }}</strong></td>
+                            <td class="table-element">{{ non_closed_visit.get_duration }}</td>
+                            {% if non_closed_visit.find_long_visit %}
+                                <td class="table-element" style="color:red">{{ non_closed_visit.find_long_visit }}</td>
+                            {% else %}
+                                <td class="table-element">{{ non_closed_visit.find_long_visit }}</td>
+                            {% endif %}
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
