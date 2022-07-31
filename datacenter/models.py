@@ -27,14 +27,14 @@ class Visit(models.Model):
         time_entered = self.entered_at
         if time_leaved:
             duration = time_leaved - time_entered
-            duration_hours = duration.seconds // 60 // 60
-            duration_minutes = duration.seconds // 60 % 60
+            duration_hours = round(duration.total_seconds() // 60 // 60)
+            duration_minutes = round(duration.total_seconds() // 60 % 60)
             return f'{duration_hours} ч.{duration_minutes} мин.'
         else:
             time_now = django.utils.timezone.localtime()
             duration = time_now - time_entered
-            duration_hours = duration.seconds // 60 // 60
-            duration_minutes = duration.seconds // 60 % 60
+            duration_hours = round(duration.total_seconds() // 60 // 60)
+            duration_minutes = round(duration.total_seconds() // 60 % 60)
             return f'{duration_hours} ч.{duration_minutes} мин.'
 
     def find_long_visit(self):
@@ -44,13 +44,13 @@ class Visit(models.Model):
         strange_time = 60   # 60 minutes
         if self.leaved_at:
             duration = self.leaved_at - self.entered_at
-            duration_by_minutes = duration.seconds // 60
+            duration_by_minutes = duration.total_seconds() // 60
             if duration_by_minutes > strange_time:
                 return True
             return False
         else:
             duration = time_now - self.entered_at
-            duration_by_minutes = duration.seconds // strange_time
+            duration_by_minutes = duration.total_seconds() // strange_time
             if duration_by_minutes > strange_time:
                 return True
             return False
