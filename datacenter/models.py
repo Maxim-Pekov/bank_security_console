@@ -37,9 +37,9 @@ class Visit(models.Model):
 
 
     def find_long_visit(self):
-        '''Возвращает True, если время нахождения в хранилище более strange_time'''
+        '''Возвращает True, если время нахождения в хранилище более strange_time (минуты)'''
 
-        strange_time = 60   # 60 minutes
+        strange_time = 60
         if self.leaved_at:
             duration = self.leaved_at - self.entered_at
         else:

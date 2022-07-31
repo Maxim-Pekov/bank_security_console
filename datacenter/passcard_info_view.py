@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 def passcard_info_view(request, passcode):
     passcard_by_passcode = get_object_or_404(Passcard, passcode=passcode)
     passcard_visit = Visit.objects.order_by('-entered_at').filter(passcard=passcard_by_passcode)
-    get_list_or_404(passcard_visit)
 
     def time_this_passcard_visit():
         this_passcard_visits = []
