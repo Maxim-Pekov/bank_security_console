@@ -19,38 +19,34 @@ class Visit(models.Model):
     passcard = models.ForeignKey(Passcard, on_delete=models.CASCADE)
     entered_at = models.DateTimeField()
     leaved_at = models.DateTimeField(null=True)
+    time_now = django.utils.timezone.localtime()
 
     def get_duration(self):
         '''Возвращает время пребывания в хранилище'''
 
         time_leaved = self.leaved_at
         time_entered = self.entered_at
+
         if time_leaved:
             duration = time_leaved - time_entered
-            duration_hours = round(duration.total_seconds() // 60 // 60)
-            duration_minutes = round(duration.total_seconds() // 60 % 60)
-            return f'{duration_hours} ч.{duration_minutes} мин.'
         else:
-            time_now = django.utils.timezone.localtime()
-            duration = time_now - time_entered
-            duration_hours = round(duration.total_seconds() // 60 // 60)
-            duration_minutes = round(duration.total_seconds() // 60 % 60)
-            return f'{duration_hours} ч.{duration_minutes} мин.'
+            duration = self.time_now - time_entered
+        duration_hours = round(duration.total_seconds() // 60 // 60)
+        duration_minutes = round(duration.total_seconds() // 60 % 60)
+        return f'{duration_hours} ч.{duration_minutes} мин.'
+
 
     def find_long_visit(self):
         '''Возвращает True, если время нахождения в хранилище более strange_time'''
 
-        time_now = django.utils.timezone.localtime()
         strange_time = 60   # 60 minutes
         if self.leaved_at:
             duration = self.leaved_at - self.entered_at
-            duration_by_minutes = duration.total_seconds() // 60
-            return bool(duration_by_minutes > strange_time)
-
         else:
-            duration = time_now - self.entered_at
-            duration_by_minutes = duration.total_seconds() // strange_time
-            return bool(duration_by_minutes > strange_time)
+            duration = self.time_now - self.entered_at
+        duration_by_minutes = duration.total_seconds() // 60
+        return bool(duration_by_minutes > strange_time)
+
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
