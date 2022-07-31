@@ -45,15 +45,12 @@ class Visit(models.Model):
         if self.leaved_at:
             duration = self.leaved_at - self.entered_at
             duration_by_minutes = duration.total_seconds() // 60
-            if duration_by_minutes > strange_time:
-                return True
-            return False
+            return bool(duration_by_minutes > strange_time)
+
         else:
             duration = time_now - self.entered_at
             duration_by_minutes = duration.total_seconds() // strange_time
-            if duration_by_minutes > strange_time:
-                return True
-            return False
+            return bool(duration_by_minutes > strange_time)
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
