@@ -3,8 +3,7 @@ from django.shortcuts import render
 
 
 def storage_information_view(request):
-    non_closed_visits = Visit.objects.filter(leaved_at=None)
-
+    non_closed_visits = Visit.objects.filter(leaved_at__isnull=True)
     context = {
         'non_closed_visits': non_closed_visits,
     }
