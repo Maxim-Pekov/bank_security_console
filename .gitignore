@@ -4,7 +4,10 @@ env/
 .vscode/
 .idea
 .replit
-/**/__pycache__
-/**/Thumbs.db
-/**/.DS_Store
+**/__pycache__
+**/Thumbs.db
+**/.DS_Store
 __pycache__
+
+poetry.lock
+/settings.py
