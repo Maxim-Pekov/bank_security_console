@@ -37,10 +37,10 @@ class Visit(models.Model):
 
 
     def find_long_visit(self):
-        strange_time = 60
+        strange_time_minutes = 60
         duration = self.get_duration()
         duration_by_minutes = duration.total_seconds() // 60
-        return bool(duration_by_minutes > strange_time)
+        return bool(duration_by_minutes > strange_time_minutes)
 
 
     def __str__(self):
