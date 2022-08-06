@@ -22,7 +22,6 @@ class Visit(models.Model):
     time_now = django.utils.timezone.localtime()
 
     def get_duration(self):
-        '''Возвращает время пребывания в хранилище'''
 
         time_leaved = self.leaved_at
         time_entered = self.entered_at
@@ -37,7 +36,6 @@ class Visit(models.Model):
 
 
     def find_long_visit(self):
-        '''Возвращает True, если время нахождения в хранилище более strange_time (минуты)'''
 
         strange_time = 60
         if self.leaved_at:
