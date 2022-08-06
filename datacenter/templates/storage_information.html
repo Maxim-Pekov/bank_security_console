@@ -45,11 +45,9 @@
                     {% for non_closed_visit in non_closed_visits %}
                         <tr>
                             <td class="table-element">{{ forloop.counter }}</td>
-
                             <td class="table-element">{{ non_closed_visit.owner_name }}</td>
                             <td class="table-element"><strong>{{ non_closed_visit.entered_at }}</strong></td>
                             <td class="table-element">{{ non_closed_visit.duration }}</td>
-
                             {% if non_closed_visit.suspect %}
                                 <td class="table-element" style="color:red">{{ non_closed_visit.suspect }}</td>
                             {% else %}
