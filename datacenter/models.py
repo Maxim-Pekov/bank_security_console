@@ -22,26 +22,23 @@ class Visit(models.Model):
     time_now = django.utils.timezone.localtime()
 
     def get_duration(self):
-
-        time_leaved = self.leaved_at
-        time_entered = self.entered_at
-
-        if time_leaved:
-            duration = time_leaved - time_entered
+        if self.leaved_at:
+            duration = self.leaved_at - self.entered_at
         else:
-            duration = self.time_now - time_entered
+            duration = self.time_now - self.entered_at
+        return duration
+
+
+    def get_readably_duration(self):
+        duration = self.get_duration()
         duration_hours = round(duration.total_seconds() // 60 // 60)
         duration_minutes = round(duration.total_seconds() // 60 % 60)
         return f'{duration_hours} ч.{duration_minutes} мин.'
 
 
     def find_long_visit(self):
-
         strange_time = 60
-        if self.leaved_at:
-            duration = self.leaved_at - self.entered_at
-        else:
-            duration = self.time_now - self.entered_at
+        duration = self.get_duration()
         duration_by_minutes = duration.total_seconds() // 60
         return bool(duration_by_minutes > strange_time)
 
