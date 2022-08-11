@@ -3,11 +3,11 @@
 The bank security console is designed to detect and control passes to enter the bank vault.
 There are several options:
 
-View all active passes
+___View all active passes___
 
-Display all visits of a specific pass
+___Display all visits of a specific pass___
 
-Show all passes in storage
+___Show all passes in storage___
 
 
 
@@ -17,21 +17,43 @@ Show all passes in storage
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+
+---
 ## Installation
-
 Use these commands to start a project on your hardware.
+- [x] You can mark completed tasks with checkboxes 
+1. Install
 
-```bash
-git clone https://github.com/Maxim-Pekov/bank_security_console
-install -r requirements.txt
-start main.py
-use http://127.0.0.1:8000/
-```
-# Changes extra time to find strange user
+- [ ]    `git clone https://github.com/Maxim-Pekov/bank_security_console`
+
+- [ ]    `python -m venv venv`
+2. Activate venv    
+- [ ] Windows  `.\venv\Scripts\activate`
+- [ ] Linux, Mac  `source ./venv/bin/activate`
+3. Go to the `./bank_security_console` directory
+4. Install requirements
+
+- [ ]    `pip install -r requirements.txt`
+
+5. Create new file in main directory `.env`, where you will write your DATABASE_URL, DEBUG
+- Replace the variables `( postgres, USER, PASSWORD, HOST, PORT, NAME )` with your own.
+- [ ]    `DATABASE_URL = postgres://USER:PASSWORD@HOST:PORT/NAME`
+    
+
+- Your app raises an exception when DEBUG is True `True`.
+
+- [ ]    `DEBUG = False`
+
+6. Run this command
+
+- [ ]   `python manage.py runserver`
+---
+
+## Changes _extra time_ to find strange user
 ```bash
 1). Open ./datacenter/models.py
 2). Find function find_long_visit()
-3). Change 'strange_time' to your time by minutes
+3). Change 'strange_time_minutes' to your time by minutes
 ```
 
 ## Project Goals
