@@ -2,16 +2,8 @@ import os
 
 from . import config
 
-DATABASES = {
-    'default': {
-        'ENGINE': config.ENGINE,
-        'HOST': config.HOST,
-        'PORT': config.PORT,
-        'NAME': config.NAME,
-        'USER': config.USER,
-        'PASSWORD': config.PASSWORD,
-    }
-}
+
+DATABASES = config.DATABASES
 
 INSTALLED_APPS = ['datacenter']
 
