@@ -1,15 +1,19 @@
 import os
 
-from project import config
+from environs import Env
 
 
-DATABASES = config.DATABASES
+env = Env()
+env.read_env()
+
+
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 
 INSTALLED_APPS = ['datacenter']
 
 SECRET_KEY = 'REPLACE_ME'
 
-DEBUG = config.DEBUG
+DEBUG = env.bool('DEBUG')
 
 ROOT_URLCONF = 'project.urls'
 
