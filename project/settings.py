@@ -1,6 +1,6 @@
 import os
 
-from . import config
+from project import config
 
 
 DATABASES = config.DATABASES
