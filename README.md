@@ -35,7 +35,7 @@ Use these commands to start a project on your hardware.
 
 - [ ]    `pip install -r requirements.txt`
 
-5. Create new file in main directory `.env`, where you will write your DATABASE_URL, DEBUG
+5. Create new file in main directory `.env`, where you will write your DATABASE_URL, DEBUG, SECRET_KEY
 - Replace the variables `( postgres, USER, PASSWORD, HOST, PORT, NAME )` with your own.
 - [ ]    `DATABASE_URL = postgres://USER:PASSWORD@HOST:PORT/NAME`
     
@@ -44,7 +44,14 @@ Use these commands to start a project on your hardware.
 
 - [ ]    `DEBUG = False`
 
-6. Run this command
+
+- Write SECRET_KEY in .env.
+- [ ] 'SECRET_KEY = "your secret key"'
+
+6. Add .env to the `.gitignore` file.
+
+
+7. Run this command
 
 - [ ]   `python manage.py runserver`
 ---
