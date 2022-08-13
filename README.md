@@ -46,7 +46,11 @@ Use these commands to start a project on your hardware.
 
 
 - Write SECRET_KEY in .env.
-- [ ] 'SECRET_KEY = "your secret key"'
+- [ ] `SECRET_KEY = "your secret key"`
+
+
+- Write ALLOWED_HOSTS in .env.
+- [ ] `ALLOWED_HOSTS = ["list of your hosts"]`
 
 6. Add .env to the `.gitignore` file.
 
